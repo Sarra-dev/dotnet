@@ -1,0 +1,9 @@
+@model MyFirstApp.Models.ViewModels.CustomerMovieVM
+
+
+@foreach(var item in Model.movies)
+{
+    <h2>@item.name</h2>
+
+}
+<h4>@Model.customer.name</h4>
