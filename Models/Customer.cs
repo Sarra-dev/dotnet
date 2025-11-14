@@ -8,4 +8,6 @@ public class Customer
     {
         
     }
+    public List<Movie> movies { get; set; }
+    public MembershipType? membershipType { get; set; }
 }

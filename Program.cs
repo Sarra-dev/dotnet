@@ -9,7 +9,18 @@ builder.Services.AddControllersWithViews();
 // Add MySQL connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 36)))); // Change version to match your MySQL version
+    options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 36)),
+    mysqlOptions =>
+        {
+            mysqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(10),
+                errorNumbersToAdd: null
+            );
+    
+        })
+    
+    ); // Change version to match your MySQL version
 
 var app = builder.Build();
 
